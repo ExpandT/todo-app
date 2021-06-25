@@ -1,0 +1,20 @@
+<div class="todo-container">
+    <mat-form-field appearance="fill">
+      <mat-label>Some Task</mat-label>
+      <input matInput [formControl]="input" (keyup.enter)="addItem()">
+    </mat-form-field>
+    <button mat-raised-button (click)="addItem()">Create new Task</button>
+  </div>
+  <div class="todo-list">
+    <ul>
+      <li *ngFor="let item of todoStorage; let index">
+        <a [routerLink]="['../task', item.id]">
+          {{item.name}}
+        </a>
+        <button mat-mini-fab (click)="deleteTask(index)" >
+          <mat-icon>delete</mat-icon>
+        </button>
+      </li>
+    </ul>
+    <p *ngIf="todoStorage.length">Todos Remaining : {{todoStorage.length}}</p>
+</div>
