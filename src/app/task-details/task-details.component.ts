@@ -20,7 +20,7 @@ export class TaskDetailsComponent implements OnInit {
  todoItem?: { id: number, name: string, done: boolean };
 
 
-  constructor(public readonly route: ActivatedRoute) {
+  constructor(private readonly route: ActivatedRoute) {
 
   }
   get name(): string{
