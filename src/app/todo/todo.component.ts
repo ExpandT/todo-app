@@ -29,7 +29,6 @@ export class TodoComponent {
     this.todoStorage = this.allItems;
   }
 
-
   setDataToLocalStorage(){
     localStorage.setItem('allItems', JSON.stringify(this.todoStorage));
   }
