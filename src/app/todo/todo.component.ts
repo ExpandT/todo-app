@@ -1,6 +1,12 @@
-import {Component, OnInit, ChangeDetectionStrategy, EventEmitter, Output} from '@angular/core';
-import { FormControl, NgForm } from '@angular/forms';
+import {Component, OnInit, ChangeDetectionStrategy} from '@angular/core';
+import { FormControl } from '@angular/forms';
 
+
+interface TodoData{
+  id: number,
+  name: string,
+  done: boolean
+}
 
 @Component({
   selector: 'todo-todo',
@@ -13,9 +19,9 @@ export class TodoComponent implements OnInit {
 
   input = new FormControl('');
 
-  allItems : string;
+  allItems : [];
 
-  todoStorage : any = [];
+  todoStorage : TodoData[] = [];
 
 
   constructor() {
@@ -38,7 +44,7 @@ export class TodoComponent implements OnInit {
     console.log(this.todoStorage);
   }
 
-  deleteTask(index: number) {
+  deleteTask(index: any) {
     this.todoStorage.splice(index, 1);
     localStorage.setItem('allItems', JSON.stringify(this.todoStorage))
   }
