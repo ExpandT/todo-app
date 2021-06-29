@@ -41,7 +41,6 @@ export class TodoComponent implements OnInit {
     })
     this.input.setValue('');
     localStorage.setItem('allItems', JSON.stringify(this.todoStorage));
-    console.log(this.todoStorage);
   }
 
   deleteTask(index: any) {
