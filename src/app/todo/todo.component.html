@@ -1,10 +1,12 @@
+<form>
 <div class="todo-container">
     <mat-form-field appearance="fill">
       <mat-label>Some Task</mat-label>
-      <input matInput [formControl]="input" (keyup.enter)="addItem()">
+      <input matInput [formControl]="input">
     </mat-form-field>
-    <button mat-raised-button (click)="addItem()">Create new Task</button>
+  <button mat-raised-button type="submit" (click)="addItem()">Create new Task</button>
   </div>
+</form>
   <div class="todo-list">
     <ul>
       <li *ngFor="let item of todoStorage; let index">
