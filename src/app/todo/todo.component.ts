@@ -24,12 +24,12 @@ export class TodoComponent implements OnInit {
     this.allItems = (localStorage.getItem('allItems') !== null) ? JSON.parse(localStorage.getItem('allItems')!) : [];
     this.todoStorage = this.allItems;
   }
-  
+
 
   addItem() {
     if(this.input.value == '') {
         return
-    };
+    }
    this.todoStorage.unshift({
       id: Date.now(),
       name: this.input.value,
@@ -39,7 +39,7 @@ export class TodoComponent implements OnInit {
     localStorage.setItem('allItems', JSON.stringify(this.todoStorage));
     console.log(this.todoStorage);
   }
-  
+
   deleteTask(index: number) {
     this.todoStorage.splice(index, 1);
     localStorage.setItem('allItems', JSON.stringify(this.todoStorage))

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 interface TodoData{
@@ -10,7 +10,8 @@ interface TodoData{
 @Component({
   selector: 'todo-task-details',
   templateUrl: './task-details.component.html',
-  styleUrls: ['./task-details.component.scss']
+  styleUrls: ['./task-details.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 
 export class TaskDetailsComponent implements OnInit {
