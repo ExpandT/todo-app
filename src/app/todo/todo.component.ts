@@ -1,4 +1,4 @@
-import {Component, OnInit, ChangeDetectionStrategy} from '@angular/core';
+import {Component, ChangeDetectionStrategy} from '@angular/core';
 import { FormControl } from '@angular/forms';
 
 
@@ -15,7 +15,7 @@ interface TodoData{
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 
-export class TodoComponent implements OnInit {
+export class TodoComponent {
 
   input = new FormControl('');
 
@@ -49,9 +49,6 @@ export class TodoComponent implements OnInit {
   deleteTask(index: any) {
     this.todoStorage.splice(index, 1);
     this.dataToLocalStorage();
-  }
-
-  ngOnInit(): void {
   }
 
 }
