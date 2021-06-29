@@ -29,6 +29,9 @@ export class TodoComponent implements OnInit {
     this.todoStorage = this.allItems;
   }
 
+  dataToLocalStorage(){
+    localStorage.setItem('allItems', JSON.stringify(this.todoStorage));
+  }
 
   addItem() {
     if(this.input.value == '') {
@@ -40,12 +43,12 @@ export class TodoComponent implements OnInit {
       done: false
     })
     this.input.setValue('');
-    localStorage.setItem('allItems', JSON.stringify(this.todoStorage));
+    this.dataToLocalStorage();
   }
 
   deleteTask(index: any) {
     this.todoStorage.splice(index, 1);
-    localStorage.setItem('allItems', JSON.stringify(this.todoStorage))
+    this.dataToLocalStorage();
   }
 
   ngOnInit(): void {
