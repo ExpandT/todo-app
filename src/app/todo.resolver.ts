@@ -6,7 +6,7 @@ import { map } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root'
 })
-export class TodoResolver implements Resolve<any> {
+export class TodoResolver implements Resolve<{}[]> {
   resolve(): Observable<any> {
     const allItems = localStorage.getItem('allItems');
 
