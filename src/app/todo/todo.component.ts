@@ -1,5 +1,5 @@
-import { Component, OnInit , ChangeDetectionStrategy } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import {Component, OnInit, ChangeDetectionStrategy, EventEmitter, Output} from '@angular/core';
+import { FormControl, NgForm } from '@angular/forms';
 
 
 @Component({
@@ -8,14 +8,12 @@ import { FormControl } from '@angular/forms';
   styleUrls: ['./todo.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class TodoComponent implements OnInit {
 
+export class TodoComponent implements OnInit {
 
   input = new FormControl('');
 
   allItems : string;
-
-  items : any = [];
 
   todoStorage : any = [];
 
