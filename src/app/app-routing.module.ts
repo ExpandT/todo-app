@@ -9,8 +9,9 @@ import { TodoResolver } from './todo.resolver';
 const routes: Routes = [
   {path: 'task/:id',component: TaskDetailsComponent, resolve: {todoData: TodoResolver}},
   {path: 'todo', component: TodoComponent},
-  { path: '', component: HomeComponent},
-  {path: '404', component: ErrorPageComponent}
+  {path: 'home', component: HomeComponent},
+  {path: '404', component: ErrorPageComponent},
+  {path: '', component: HomeComponent}
 ];
 
 @NgModule({
