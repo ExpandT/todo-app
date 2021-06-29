@@ -1,5 +1,5 @@
 import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import {ActivatedRoute} from '@angular/router';
 
 interface TodoData{
   id: number,
@@ -19,8 +19,6 @@ export class TaskDetailsComponent implements OnInit {
  id!: number;
  data!: TodoData[];
  todoItem?: { id: number, name: string, done: boolean };
-
-
   constructor(private readonly route: ActivatedRoute) {
 
   }
@@ -36,8 +34,7 @@ export class TaskDetailsComponent implements OnInit {
     }
 
     this.id = parseInt(idString);
-    const routedData = this.route.snapshot.data.todoData;
-    this.data = routedData;
+    this.data = this.route.snapshot.data.todoData;
 
     const findId = (data: TodoData[]) => {
       return data.find(todo => todo.id === this.id);

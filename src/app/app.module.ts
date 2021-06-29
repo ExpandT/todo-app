@@ -8,12 +8,16 @@ import { MaterialModule } from './material/material.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { TaskDetailsComponent } from './task-details/task-details.component';
 import { TodoComponent } from './todo/todo.component';
+import { ErrorPageComponent } from './error-page/error-page.component';
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     TaskDetailsComponent,
-    TodoComponent
+    TodoComponent,
+    ErrorPageComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
