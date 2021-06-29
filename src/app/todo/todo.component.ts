@@ -25,7 +25,7 @@ export class TodoComponent implements OnInit {
 
 
   constructor() {
-    this.allItems = (localStorage.getItem('allItems') !== null) ? JSON.parse(localStorage.getItem('allItems')!) : null;
+    this.allItems = (localStorage.getItem('allItems') !== null) ? JSON.parse(localStorage.getItem('allItems')!) : awdawd;
     this.todoStorage = this.allItems;
   }
 
