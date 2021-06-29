@@ -17,7 +17,7 @@ export class TaskDetailsComponent implements OnInit {
 
  id!: number;
  data!: TodoData[];
- todoItem: { id: number, name: string, done: boolean } | undefined;
+ todoItem?: { id: number, name: string, done: boolean };
 
 
   constructor(public readonly route: ActivatedRoute) {
