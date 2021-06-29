@@ -3,19 +3,21 @@
     padding: 10px;
     button{
         margin-left: 40px;
-      .todo-list{
-        text-align: center;
-        li{
-          list-style: none;
-        }
-        a{
-          text-decoration: none;
-          font-size: 24px;
-          color: #3a7527;
-        }
-        button{
-          margin: auto;
-        }
-      }
     }
 }
+
+.todo-list {
+  text-align: center;
+  li {
+    list-style: none;
+  }
+  a{
+    text-decoration: none;
+    font-size: 24px;
+    color: #3a7527;
+  }
+  button{
+    margin: auto;
+  }
+}
+

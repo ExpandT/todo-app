@@ -1,13 +1,19 @@
 import { Injectable } from '@angular/core';
-import {Router, Resolve,RouterStateSnapshot,ActivatedRouteSnapshot} from '@angular/router';
+import { Resolve} from '@angular/router';
 import { Observable, of } from 'rxjs';
-import { delay, map } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TodoResolver implements Resolve<any> {
   resolve(): Observable<any> {
-  return of(localStorage.allItems).pipe(map ( res => JSON.parse(res)));  
+    const allItems = localStorage.getItem('allItems');
+
+    if (allItems === null) {
+      return of([]);
+    }
+
+    return of(allItems).pipe(map ( res => JSON.parse(res)));
   }
 }
