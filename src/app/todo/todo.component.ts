@@ -1,5 +1,5 @@
 import {Component, ChangeDetectionStrategy} from '@angular/core';
-import { FormControl } from '@angular/forms';
+import {FormBuilder} from '@angular/forms';
 
 
 interface TodoData{
@@ -17,19 +17,19 @@ interface TodoData{
 
 export class TodoComponent {
 
-  input = new FormControl('');
+  input = this.fb.control('');
 
   allItems : [];
 
   todoStorage : TodoData[] = [];
 
 
-  constructor() {
+  constructor(private fb: FormBuilder) {
     this.allItems = (localStorage.getItem('allItems') !== null) ? JSON.parse(localStorage.getItem('allItems')!) : null;
     this.todoStorage = this.allItems;
   }
 
-  dataToLocalStorage(){
+  setDataToLocalStorage(){
     localStorage.setItem('allItems', JSON.stringify(this.todoStorage));
   }
 
@@ -37,18 +37,26 @@ export class TodoComponent {
     if(this.input.value == '') {
         return
     }
-   this.todoStorage.unshift({
+
+    const newTodo = {
       id: Date.now(),
       name: this.input.value,
       done: false
-    })
+    }
     this.input.setValue('');
-    this.dataToLocalStorage();
+
+    this.todoStorage = [newTodo, ...this.todoStorage];
+
+    this.setDataToLocalStorage();
+
   }
 
   deleteTask(index: any) {
-    this.todoStorage.splice(index, 1);
-    this.dataToLocalStorage();
+   this.todoStorage = this.todoStorage.filter((value, index1) => index !== index1);
+    this.setDataToLocalStorage();
+    // console.log(updatedArray);
+    // this.todoStorage.splice(index, 1);
+    // this.setDataToLocalStorage();
   }
 
 }

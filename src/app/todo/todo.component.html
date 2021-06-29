@@ -9,7 +9,7 @@
 </form>
   <div class="todo-list">
     <ul>
-      <li *ngFor="let item of todoStorage; let index">
+      <li *ngFor="let item of todoStorage; let index = index">
         <a [routerLink]="['../task', item.id]">
           {{item.name}}
         </a>
