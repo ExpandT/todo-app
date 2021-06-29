@@ -35,10 +35,11 @@ export class TaskDetailsComponent implements OnInit {
     }
 
     this.id = parseInt(idString);
-    this.data = this.route.snapshot.data.todoData;
+    const routedData = this.route.snapshot.data.todoData;
+    this.data = routedData;
 
-    const findId = (data: TodoData[]) =>{
-      return data.find( todo => todo.id === this.id);
+    const findId = (data: TodoData[]) => {
+      return data.find(todo => todo.id === this.id);
     }
     this.todoItem = findId(this.data);
   }
