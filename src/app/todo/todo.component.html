@@ -4,7 +4,7 @@
       <mat-label>Some Task</mat-label>
       <input matInput formControlName="name">
     </mat-form-field>
-  <button mat-raised-button type="submit" (click)="addItem()">Create new Task</button>
+  <button mat-raised-button type="submit" [disabled]="input.invalid" (click)="addItem()">Create new Task</button>
   </div>
 </form>
   <div class="todo-list">

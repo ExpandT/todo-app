@@ -1,5 +1,5 @@
 import {Component, ChangeDetectionStrategy} from '@angular/core';
-import {FormBuilder, Validators} from '@angular/forms';
+import {FormBuilder, FormControl, Validators} from '@angular/forms';
 import {TodoData } from "../share/todo";
 
 
@@ -12,9 +12,13 @@ import {TodoData } from "../share/todo";
 
 export class TodoComponent {
 
-  input =  this.formBuilder.group({name: ''});
+  input =  this.formBuilder.group({name: ['', Validators.required]});
 
   todoStorage : TodoData[] = [];
+
+  get nameControl(): FormControl {
+    return this.input.get('name') as FormControl;
+  }
 
   constructor(private formBuilder: FormBuilder)  {
     this.todoStorage =  this.getLocalStorageItems();
@@ -28,10 +32,7 @@ export class TodoComponent {
     localStorage.setItem('allItems', JSON.stringify(this.todoStorage));
   }
 
-  addItem() : TodoData[] | void {
-    if(this.input.value.name == '' || this.input.value.name == null) {
-        return;
-    }
+  addItem() : void {
     const newTodo = {
       id: Date.now(),
       name: this.input.value.name,
