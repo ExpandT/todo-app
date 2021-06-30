@@ -29,7 +29,7 @@ export class TodoComponent {
   }
 
   addItem() : TodoData[] | void {
-    if(this.input.value == '') {
+    if(this.input.value.name == '') {
         return;
     }
     const newTodo = {
