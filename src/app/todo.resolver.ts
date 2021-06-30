@@ -2,12 +2,7 @@ import { Injectable } from '@angular/core';
 import { Resolve} from '@angular/router';
 import { Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
-
-interface TodoData{
-  id: number,
-  name: string,
-  done: boolean
-}
+import { TodoData } from "./share/todo.model";
 
 @Injectable({
   providedIn: 'root'

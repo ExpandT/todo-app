@@ -1,12 +1,7 @@
 import {Component, ChangeDetectionStrategy} from '@angular/core';
 import {FormBuilder} from '@angular/forms';
+import {TodoData } from "../share/todo.model";
 
-
-interface TodoData{
-  id: number,
-  name: string,
-  done: boolean
-}
 
 @Component({
   selector: 'todo-todo',

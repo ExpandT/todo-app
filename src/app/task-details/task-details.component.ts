@@ -1,11 +1,6 @@
 import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
-
-interface TodoData{
-  id: number,
-  name: string,
-  done: boolean
-}
+import { TodoData } from "../share/todo.model";
 
 @Component({
   selector: 'todo-task-details',
