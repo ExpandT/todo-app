@@ -12,12 +12,11 @@ import {TodoData } from "../share/todo";
 
 export class TodoComponent {
 
-  input = this.formBuilder.control('');
+    input =  this.formBuilder.group({name: ''});
 
   todoStorage : TodoData[] = [];
 
-
-  constructor(private formBuilder: FormBuilder) {
+  constructor(private formBuilder: FormBuilder)  {
     this.todoStorage =  this.getLocalStorageItems();
   }
 
@@ -25,30 +24,28 @@ export class TodoComponent {
     return (localStorage.getItem('allItems') !== null) ? JSON.parse(localStorage.getItem('allItems')!) : null;
   }
 
-  setDataToLocalStorage(){
+  setDataToLocalStorage(): void {
     localStorage.setItem('allItems', JSON.stringify(this.todoStorage));
   }
 
-  addItem() {
+  addItem() : TodoData[] | void {
     if(this.input.value == '') {
-        return
+        return;
     }
-
     const newTodo = {
       id: Date.now(),
-      name: this.input.value,
+      name: this.input.value.name,
       done: false
     }
-    this.input.setValue('');
+    this.input.reset();
 
     this.todoStorage = [newTodo, ...this.todoStorage];
 
     this.setDataToLocalStorage();
-
   }
 
-  deleteTask(index: any) {
-   this.todoStorage = this.todoStorage.filter((value, index1) => index !== index1);
+  deleteTask(index: number): void {
+   this.todoStorage = this.todoStorage.filter((value, todoIndex) => index !== todoIndex);
     this.setDataToLocalStorage();
   }
 

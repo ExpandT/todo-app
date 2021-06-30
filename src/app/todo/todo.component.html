@@ -1,8 +1,8 @@
-<form>
+<form [formGroup]="input">
 <div class="todo-container">
     <mat-form-field appearance="fill">
       <mat-label>Some Task</mat-label>
-      <input matInput [formControl]="input">
+      <input matInput formControlName="name">
     </mat-form-field>
   <button mat-raised-button type="submit" (click)="addItem()">Create new Task</button>
   </div>
