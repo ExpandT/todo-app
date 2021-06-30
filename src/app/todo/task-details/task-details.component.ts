@@ -1,6 +1,6 @@
 import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
-import { TodoData } from "../share/todo";
+import { TodoData } from "../../share/todo";
 
 @Component({
   selector: 'todo-task-details',

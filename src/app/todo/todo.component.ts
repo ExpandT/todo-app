@@ -1,5 +1,5 @@
 import {Component, ChangeDetectionStrategy} from '@angular/core';
-import {FormBuilder} from '@angular/forms';
+import {FormBuilder, Validators} from '@angular/forms';
 import {TodoData } from "../share/todo";
 
 
@@ -12,7 +12,7 @@ import {TodoData } from "../share/todo";
 
 export class TodoComponent {
 
-    input =  this.formBuilder.group({name: ''});
+  input =  this.formBuilder.group({name: ''});
 
   todoStorage : TodoData[] = [];
 
@@ -29,7 +29,7 @@ export class TodoComponent {
   }
 
   addItem() : TodoData[] | void {
-    if(this.input.value.name == '') {
+    if(this.input.value.name == '' || this.input.value.name == null) {
         return;
     }
     const newTodo = {

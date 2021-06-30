@@ -10,7 +10,7 @@
   <div class="todo-list">
     <ul>
       <li *ngFor="let item of todoStorage; let index = index">
-        <a [routerLink]="['../task', item.id]">
+        <a [routerLink]="['task', item.id]">
           {{item.name}}
         </a>
         <button mat-mini-fab (click)="deleteTask(index)" >
