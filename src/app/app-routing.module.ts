@@ -11,7 +11,8 @@ const routes: Routes = [
   {path: 'todo', component: TodoComponent},
   {path: 'home', component: HomeComponent},
   {path: '404', component: ErrorPageComponent},
-  {path: '', component: HomeComponent}
+  {path: '', component: HomeComponent},
+  {path: '**', redirectTo: '404', pathMatch: 'full'}
 ];
 
 @NgModule({
