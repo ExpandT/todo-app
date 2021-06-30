@@ -18,7 +18,7 @@ import { FormsModule } from '@angular/forms';
     TaskDetailsComponent,
     TodoComponent,
     ErrorPageComponent,
-    HomeComponent
+    HomeComponent,
   ],
   imports: [
     BrowserModule,

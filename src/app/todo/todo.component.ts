@@ -1,6 +1,6 @@
 import {Component, ChangeDetectionStrategy} from '@angular/core';
 import {FormBuilder} from '@angular/forms';
-import {TodoData } from "../share/todo.model";
+import {TodoData } from "../share/todo";
 
 
 @Component({
@@ -12,16 +12,17 @@ import {TodoData } from "../share/todo.model";
 
 export class TodoComponent {
 
-  input = this.fb.control('');
-
-  allItems : [];
+  input = this.formBuilder.control('');
 
   todoStorage : TodoData[] = [];
 
 
-  constructor(private fb: FormBuilder) {
-    this.allItems = (localStorage.getItem('allItems') !== null) ? JSON.parse(localStorage.getItem('allItems')!) : null;
-    this.todoStorage = this.allItems;
+  constructor(private formBuilder: FormBuilder) {
+    this.todoStorage =  this.getLocalStorageItems();
+  }
+
+  getLocalStorageItems(): TodoData[] {
+    return (localStorage.getItem('allItems') !== null) ? JSON.parse(localStorage.getItem('allItems')!) : null;
   }
 
   setDataToLocalStorage(){
@@ -49,9 +50,6 @@ export class TodoComponent {
   deleteTask(index: any) {
    this.todoStorage = this.todoStorage.filter((value, index1) => index !== index1);
     this.setDataToLocalStorage();
-    // console.log(updatedArray);
-    // this.todoStorage.splice(index, 1);
-    // this.setDataToLocalStorage();
   }
 
 }

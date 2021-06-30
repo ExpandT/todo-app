@@ -1,6 +1,6 @@
 import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
-import { TodoData } from "../share/todo.model";
+import { TodoData } from "../share/todo";
 
 @Component({
   selector: 'todo-task-details',
@@ -14,6 +14,7 @@ export class TaskDetailsComponent implements OnInit {
  id!: number;
  data!: TodoData[];
  todoItem?: { id: number, name: string, done: boolean };
+
   constructor(private readonly route: ActivatedRoute) {
 
   }
@@ -31,10 +32,11 @@ export class TaskDetailsComponent implements OnInit {
     this.id = parseInt(idString);
     this.data = this.route.snapshot.data.todoData;
 
-    const findId = (data: TodoData[]) => {
-      return data.find(todo => todo.id === this.id);
-    }
-    this.todoItem = findId(this.data);
+    this.todoItem = this.getTodoItem(this.data);
+  }
+
+  getTodoItem(data: TodoData[]): TodoData | undefined {
+    return data.find(todo => todo.id === this.id);
   }
 
 }

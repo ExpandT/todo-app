@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Resolve} from '@angular/router';
 import { Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { TodoData } from "./share/todo.model";
+import { TodoData } from "./share/todo";
 
 @Injectable({
   providedIn: 'root'
