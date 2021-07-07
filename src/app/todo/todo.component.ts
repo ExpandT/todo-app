@@ -16,16 +16,13 @@ export class TodoComponent {
 
   todoStorage : TodoData[] = [];
 
-  get nameControl(): FormControl {
-    return this.input.get('name') as FormControl;
-  }
 
   constructor(private formBuilder: FormBuilder)  {
     this.todoStorage =  this.getLocalStorageItems();
   }
 
   getLocalStorageItems(): TodoData[] {
-    return (localStorage.getItem('allItems') !== null) ? JSON.parse(localStorage.getItem('allItems')!) : null;
+    return (localStorage.getItem('allItems') !== null) ? JSON.parse(localStorage.getItem('allItems')!) : [];
   }
 
   setDataToLocalStorage(): void {
