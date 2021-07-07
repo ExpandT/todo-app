@@ -1,0 +1,10 @@
+<div class="container">
+  <input [formControl]="input" (keydown.arrowDown)="increaseTabIndex($event)">
+  <div class="dropdown-list" *ngIf="isBlockVisible" (keydown.arrowDown)="increaseTabIndex($event)"
+       (keydown.arrowUp)="decreaseTabIndex($event)" #container>
+    <a
+      tabindex="0" (keydown.enter)="setInputValue(i.name)" (click)="setInputValue(i.name)"
+      *ngFor="let i of filterData">{{i.name}}</a>
+  </div>
+</div>
+<div [class.wrapper]="isVisible" (click)="hideNames()"></div>

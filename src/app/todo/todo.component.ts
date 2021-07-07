@@ -1,6 +1,6 @@
 import {Component, ChangeDetectionStrategy} from '@angular/core';
 import {FormBuilder, FormControl, Validators} from '@angular/forms';
-import {TodoData } from "../share/todo";
+import {TodoData} from "../share/todo";
 
 
 @Component({
@@ -12,13 +12,16 @@ import {TodoData } from "../share/todo";
 
 export class TodoComponent {
 
-  input =  this.formBuilder.group({name: ['', Validators.required]});
+  form = this.formBuilder.group({name: ['', Validators.required]});
 
-  todoStorage : TodoData[] = [];
+  todoStorage: TodoData[] = [];
 
+  get nameControl(): FormControl {
+    return this.form.get('name') as FormControl;
+  }
 
-  constructor(private formBuilder: FormBuilder)  {
-    this.todoStorage =  this.getLocalStorageItems();
+  constructor(private formBuilder: FormBuilder) {
+    this.todoStorage = this.getLocalStorageItems();
   }
 
   getLocalStorageItems(): TodoData[] {
@@ -29,13 +32,13 @@ export class TodoComponent {
     localStorage.setItem('allItems', JSON.stringify(this.todoStorage));
   }
 
-  addItem() : void {
+  addItem(): void {
     const newTodo = {
       id: Date.now(),
-      name: this.input.value.name,
+      name: this.nameControl.value,
       done: false
     }
-    this.input.reset();
+    this.form.reset();
 
     this.todoStorage = [newTodo, ...this.todoStorage];
 
@@ -43,7 +46,7 @@ export class TodoComponent {
   }
 
   deleteTask(index: number): void {
-   this.todoStorage = this.todoStorage.filter((value, todoIndex) => index !== todoIndex);
+    this.todoStorage = this.todoStorage.filter((value, todoIndex) => index !== todoIndex);
     this.setDataToLocalStorage();
   }
 

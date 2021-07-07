@@ -1,24 +1,24 @@
-<form [formGroup]="input">
-<div class="todo-container">
+<form [formGroup]="form">
+  <div class="todo-container">
     <mat-form-field appearance="fill">
       <mat-label>Some Task</mat-label>
       <input matInput formControlName="name">
     </mat-form-field>
-  <button mat-raised-button type="submit" [disabled]="input.invalid" (click)="addItem()">Create new Task</button>
+    <button mat-raised-button type="submit" [disabled]="form.invalid" (click)="addItem()">Create new Task</button>
   </div>
 </form>
-  <div class="todo-list">
-    <ul>
-      <li *ngFor="let item of todoStorage; let index = index">
-        <a [routerLink]="['task', item.id]">
-          {{item.name}}
-        </a>
-        <button mat-mini-fab (click)="deleteTask(index)" >
-          <mat-icon>delete</mat-icon>
-        </button>
-      </li>
-    </ul>
-    <p *ngIf="todoStorage.length">Todos Remaining : {{todoStorage.length}}</p>
+<div class="todo-list">
+  <ul>
+    <li *ngFor="let item of todoStorage; let index = index">
+      <a [routerLink]="['task', item.id]">
+        {{item.name}}
+      </a>
+      <button mat-mini-fab (click)="deleteTask(index)">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </li>
+  </ul>
+  <p *ngIf="todoStorage.length">Todos Remaining : {{todoStorage.length}}</p>
 </div>
 
 

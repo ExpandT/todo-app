@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from "./home/home.component";
 
 const routes: Routes = [
+  {path: 'search', loadChildren: ()=> import('./search/search.module').then(m => m.SearchModule)},
   {path: 'todo', loadChildren: () => import('./todo/todo.module').then(m => m.TodoModule)},
   {path: 'home', loadChildren: () => import('./home/home.module').then(m => m.HomeModule)},
   {path: '404', loadChildren: () => import('./error-page/error-page.module').then(m => m.ErrorPageModule)},
