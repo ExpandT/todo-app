@@ -15,6 +15,7 @@ export class TodoComponent {
 
   isSelected = true;
   selectedColor = "";
+  priorities = Priorities;
 
   form = this.formBuilder.group({name: ['', Validators.required]});
 

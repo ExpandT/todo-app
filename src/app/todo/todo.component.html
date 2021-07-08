@@ -16,7 +16,9 @@
 <div class="todo-list">
   <ul>
     <li *ngFor="let item of todoStorage; let index = index">
-      <p [ngStyle]="{color: item.priority}">*</p>
+      <mat-icon *ngIf="item.priority === priorities.Urgent" aria-hidden="false" aria-label="Example home icon">priority_high</mat-icon>
+      <mat-icon *ngIf="item.priority === priorities.Middle" aria-hidden="false" aria-label="Example home icon">notifications</mat-icon>
+      <mat-icon *ngIf="item.priority === priorities.Low" aria-hidden="false" aria-label="Example home icon">low_priority</mat-icon>
       <a [routerLink]="['task', item.id]" [ngStyle]="{color: item.color}">
         {{item.name}}
       </a>
