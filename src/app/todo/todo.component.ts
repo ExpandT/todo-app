@@ -14,7 +14,7 @@ import {Priorities} from "../share/priorities.enum";
 export class TodoComponent {
 
   selectedColor = "";
-  isSelected = true;
+  isSelectedColorWhite = true;
   priorities = Priorities;
 
   form = this.formBuilder.group({name: ['', Validators.required], radiobutton: ['']});
@@ -57,7 +57,7 @@ export class TodoComponent {
 
     this.todoStorage = [newTodo, ...this.todoStorage];
 
-    this.isSelected = true;
+    this.isSelectedColorWhite = true;
 
     this.selectedColor = '#FFFFFF';
 
@@ -70,7 +70,7 @@ export class TodoComponent {
   }
 
   selectHandler(selectedValue: boolean): void {
-    this.isSelected = selectedValue;
+    this.isSelectedColorWhite = selectedValue;
   }
 
   colorHandler(selectedColor: string): void {
@@ -79,7 +79,7 @@ export class TodoComponent {
 
   changeRadioButtonValue() {
     this.selectedColor = this.radioButtonValue.value;
-    this.isSelected = false;
+    this.isSelectedColorWhite = false;
   }
 
 }
