@@ -1,5 +1,8 @@
+import {Priorities} from "./priorities.enum";
+
 export interface TodoData {
   id: number;
   name: string;
-  done: boolean;
+  color: string;
+  priority: Priorities;
 }

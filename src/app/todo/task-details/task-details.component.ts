@@ -1,6 +1,7 @@
 import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import { TodoData } from "../../share/todo";
+import {Priorities} from "../../share/priorities.enum";
 
 @Component({
   selector: 'todo-task-details',
@@ -13,7 +14,7 @@ export class TaskDetailsComponent implements OnInit {
 
  id!: number;
  data!: TodoData[];
- todoItem?: { id: number, name: string, done: boolean };
+ todoItem?: { id: number, name: string, color: string, priority: Priorities };
 
   constructor(private readonly route: ActivatedRoute) {
 

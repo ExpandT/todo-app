@@ -1,0 +1,14 @@
+<div class="color-select-container">
+  <div class="color-display-box" [ngStyle]="{backgroundColor:selectedColor}">
+    <div class="color-select-arrow">
+      <button class="arrow-button" (click)="showColorPicker()"><span class="arrow" [class.opened]="!isOpened"></span>
+      </button>
+    </div>
+  </div>
+  <div class="color-picker-container" *ngIf="colorPickerState">
+    <div (click)="onSelect(color.value)" *ngFor="let color of colorsList" class="color-picker"
+         [class.active]="colorsCompare(color.value)"
+         [ngStyle]="{backgroundColor: color.value}"></div>
+  </div>
+</div>
+<div [class.wrapper]="colorPickerState" (click)="changeArrowState()"></div>

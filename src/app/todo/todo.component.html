@@ -1,16 +1,23 @@
 <form [formGroup]="form">
   <div class="todo-container">
+    <color-control-dropdown-wrapper class="color-control" *ngIf="form.valid"
+                                    (shareColor)="colorHandler($event)"
+                                    (isSelected)="selectHandler($event)"
+    ></color-control-dropdown-wrapper>
     <mat-form-field appearance="fill">
       <mat-label>Some Task</mat-label>
       <input matInput formControlName="name">
     </mat-form-field>
-    <button mat-raised-button type="submit" [disabled]="form.invalid" (click)="addItem()">Create new Task</button>
+    <button mat-raised-button type="submit" [disabled]="form.invalid || isSelected" (click)="addItem()">Create new
+      Task
+    </button>
   </div>
 </form>
 <div class="todo-list">
   <ul>
     <li *ngFor="let item of todoStorage; let index = index">
-      <a [routerLink]="['task', item.id]">
+      <p [ngStyle]="{color: item.priority}">*</p>
+      <a [routerLink]="['task', item.id]" [ngStyle]="{color: item.color}">
         {{item.name}}
       </a>
       <button mat-mini-fab (click)="deleteTask(index)">

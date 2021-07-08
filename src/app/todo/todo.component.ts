@@ -1,6 +1,7 @@
-import {Component, ChangeDetectionStrategy} from '@angular/core';
+import {ChangeDetectionStrategy, Component} from '@angular/core';
 import {FormBuilder, FormControl, Validators} from '@angular/forms';
 import {TodoData} from "../share/todo";
+import {Priorities} from "../share/priorities.enum";
 
 
 @Component({
@@ -12,9 +13,17 @@ import {TodoData} from "../share/todo";
 
 export class TodoComponent {
 
+  isSelected = true;
+  selectedColor = "";
+
   form = this.formBuilder.group({name: ['', Validators.required]});
 
   todoStorage: TodoData[] = [];
+
+  get colorPriority() {
+    return this.selectedColor === Priorities.Urgent ? Priorities.Urgent :
+      this.selectedColor === Priorities.Middle ? Priorities.Middle : Priorities.Low;
+  }
 
   get nameControl(): FormControl {
     return this.form.get('name') as FormControl;
@@ -33,21 +42,34 @@ export class TodoComponent {
   }
 
   addItem(): void {
+
     const newTodo = {
       id: Date.now(),
       name: this.nameControl.value,
-      done: false
+      color: this.selectedColor,
+      priority: this.colorPriority
     }
     this.form.reset();
 
     this.todoStorage = [newTodo, ...this.todoStorage];
 
+    this.isSelected = true;
+
+    console.log(newTodo);
     this.setDataToLocalStorage();
   }
 
   deleteTask(index: number): void {
     this.todoStorage = this.todoStorage.filter((value, todoIndex) => index !== todoIndex);
     this.setDataToLocalStorage();
+  }
+
+  selectHandler(selectedValue: boolean): void {
+    this.isSelected = selectedValue;
+  }
+
+  colorHandler(selectedColor: string): void {
+    this.selectedColor = selectedColor;
   }
 
 }

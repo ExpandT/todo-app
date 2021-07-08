@@ -1,6 +1,12 @@
 .todo-container {
-  text-align: center;
+  display: flex;
+  justify-content: center;
   padding: 10px;
+  align-items: center;
+
+  .color-control {
+    margin-right: 50px;
+  }
 
   button {
     margin-left: 40px;
@@ -8,20 +14,31 @@
 }
 
 .todo-list {
-  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  ul {
+    padding: 0;
+  }
+  p{
+    font-size: 25px;
+  }
 
   li {
+    width: 200px;
+    display: flex;
+    justify-content: flex-end;
     list-style: none;
   }
 
   a {
+    display: flex;
+    margin-right: 20px;
+    align-items: center;
     text-decoration: none;
     font-size: 24px;
     color: #3a7527;
-  }
-
-  button {
-    margin: auto;
   }
 }
 
