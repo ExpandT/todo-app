@@ -8,6 +8,12 @@
       <mat-label>Some Task</mat-label>
       <input matInput formControlName="name">
     </mat-form-field>
+    <mat-radio-group class="radio-buttons-container" formControlName="radiobutton" (change)="changeRadioButtonValue()"
+                     *ngIf="form.valid">
+      <mat-radio-button class="radio-button-option" [value]="priorities.Urgent">Urgent</mat-radio-button>
+      <mat-radio-button class="radio-button-option" [value]="priorities.Middle">Middle</mat-radio-button>
+      <mat-radio-button class="radio-button-option" [value]="priorities.Low">Low</mat-radio-button>
+    </mat-radio-group>
     <button mat-raised-button type="submit" [disabled]="form.invalid || isSelected" (click)="addItem()">Create new
       Task
     </button>

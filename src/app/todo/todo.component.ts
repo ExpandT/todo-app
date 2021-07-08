@@ -17,7 +17,7 @@ export class TodoComponent {
   selectedColor = "";
   priorities = Priorities;
 
-  form = this.formBuilder.group({name: ['', Validators.required]});
+  form = this.formBuilder.group({name: ['', Validators.required], radiobutton: ['']});
 
   todoStorage: TodoData[] = [];
 
@@ -28,6 +28,10 @@ export class TodoComponent {
 
   get nameControl(): FormControl {
     return this.form.get('name') as FormControl;
+  }
+
+  get radioButtonValue(): FormControl {
+    return this.form.get('radiobutton') as FormControl;
   }
 
   constructor(private formBuilder: FormBuilder) {
@@ -43,7 +47,6 @@ export class TodoComponent {
   }
 
   addItem(): void {
-
     const newTodo = {
       id: Date.now(),
       name: this.nameControl.value,
@@ -71,6 +74,11 @@ export class TodoComponent {
 
   colorHandler(selectedColor: string): void {
     this.selectedColor = selectedColor;
+  }
+
+  changeRadioButtonValue() {
+    this.selectedColor = this.radioButtonValue.value;
+    this.isSelected = false;
   }
 
 }
