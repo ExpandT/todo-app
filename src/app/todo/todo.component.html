@@ -1,6 +1,7 @@
 <form [formGroup]="form">
   <div class="todo-container">
     <color-control-dropdown-wrapper class="color-control" *ngIf="form.valid"
+                                    [colorFromRadioButton]="selectedColor"
                                     (shareColor)="colorHandler($event)"
                                     (isSelected)="selectHandler($event)"
     ></color-control-dropdown-wrapper>

@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component, EventEmitter, Input, Output} from '@angular/core';
+import {ChangeDetectionStrategy, Component, EventEmitter, Input, OnChanges, Output} from '@angular/core';
 import {ColorsList} from "../../share/colors";
 
 @Component({
@@ -7,11 +7,16 @@ import {ColorsList} from "../../share/colors";
   styleUrls: ['./color-select.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ColorSelectComponent {
+export class ColorSelectComponent implements OnChanges{
 
   @Input() colorsList!: ColorsList[];
+  @Input() colorFromRadioButton = '';
   @Output() isSelected = new EventEmitter<boolean>();
   @Output() shareColor = new EventEmitter<string>();
+
+  ngOnChanges() {
+    this.selectedColor = this.colorFromRadioButton;
+  }
 
   selectedColor: string = '#FFFFFF';
 

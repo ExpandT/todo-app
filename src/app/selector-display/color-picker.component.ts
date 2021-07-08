@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component, Output, EventEmitter} from '@angular/core';
+import {ChangeDetectionStrategy, Component, Output, EventEmitter, Input} from '@angular/core';
 import {ColorsList} from "../share/colors";
 
 @Component({
@@ -9,6 +9,7 @@ import {ColorsList} from "../share/colors";
 })
 export class ColorPickerComponent {
 
+  @Input() colorFromRadioButton = '';
   @Output() isSelected = new EventEmitter<boolean>();
   @Output() shareColor = new EventEmitter<string>();
 
@@ -29,7 +30,7 @@ export class ColorPickerComponent {
     this.isSelected.emit(selectedState);
   }
 
-  shareColorValue(selectedColor: string): void{
+  shareColorValue(selectedColor: string): void {
     this.shareColor.emit(selectedColor)
   }
 }

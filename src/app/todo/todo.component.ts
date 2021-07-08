@@ -13,15 +13,15 @@ import {Priorities} from "../share/priorities.enum";
 
 export class TodoComponent {
 
-  isSelected = true;
   selectedColor = "";
+  isSelected = true;
   priorities = Priorities;
 
   form = this.formBuilder.group({name: ['', Validators.required], radiobutton: ['']});
 
   todoStorage: TodoData[] = [];
 
-  get colorPriority() {
+  get colorPriority(): Priorities {
     return this.selectedColor === Priorities.Urgent ? Priorities.Urgent :
       this.selectedColor === Priorities.Middle ? Priorities.Middle : Priorities.Low;
   }
@@ -59,7 +59,8 @@ export class TodoComponent {
 
     this.isSelected = true;
 
-    console.log(newTodo);
+    this.selectedColor = '#FFFFFF';
+
     this.setDataToLocalStorage();
   }
 
