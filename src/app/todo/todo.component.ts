@@ -22,8 +22,13 @@ export class TodoComponent {
   todoStorage: TodoData[] = [];
 
   get colorPriority(): Priority {
-    return this.selectedColor === Priority.Urgent ? Priority.Urgent :
-      this.selectedColor === Priority.Middle ? Priority.Middle : Priority.Low;
+    if (this.selectedColor === Priority.Urgent) {
+      return Priority.Urgent
+    }
+    if (this.selectedColor === Priority.Middle) {
+      return Priority.Middle
+    }
+    return Priority.Low;
   }
 
   get nameControl(): FormControl {
