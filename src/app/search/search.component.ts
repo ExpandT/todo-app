@@ -1,5 +1,6 @@
 import {ChangeDetectionStrategy, Component} from '@angular/core';
 import {TodoData} from "../share/todo";
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'todo-search',
@@ -7,13 +8,12 @@ import {TodoData} from "../share/todo";
   styleUrls: ['./search.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class SearchComponent{
+export class SearchComponent {
 
-    localStorageTodoData: TodoData[] = [];
+  localStorageTodoData: TodoData[] = [];
 
-
-  constructor() {
-    this.localStorageTodoData = JSON.parse(localStorage.getItem('allItems')!);
+  constructor(private readonly activatedRoute: ActivatedRoute) {
+    this.localStorageTodoData = JSON.parse(this.activatedRoute.snapshot.paramMap.get('allItems')!);
   }
 
 }

@@ -1,7 +1,7 @@
 import {ChangeDetectionStrategy, Component} from '@angular/core';
 import {FormBuilder, FormControl, Validators} from '@angular/forms';
 import {TodoData} from "../share/todo";
-import {Priorities} from "../share/priorities.enum";
+import {Priority} from "../share/priorities.enum";
 
 
 @Component({
@@ -15,15 +15,15 @@ export class TodoComponent {
 
   selectedColor = "";
   isSelectedDefaultColor = true;
-  priorities = Priorities;
+  priorities = Priority;
 
   form = this.formBuilder.group({name: ['', Validators.required], radiobutton: ['']});
 
   todoStorage: TodoData[] = [];
 
-  get colorPriority(): Priorities {
-    return this.selectedColor === Priorities.Urgent ? Priorities.Urgent :
-      this.selectedColor === Priorities.Middle ? Priorities.Middle : Priorities.Low;
+  get colorPriority(): Priority {
+    return this.selectedColor === Priority.Urgent ? Priority.Urgent :
+      this.selectedColor === Priority.Middle ? Priority.Middle : Priority.Low;
   }
 
   get nameControl(): FormControl {
