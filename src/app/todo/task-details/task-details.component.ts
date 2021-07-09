@@ -1,6 +1,5 @@
 import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
-import { TodoData } from "../../share/todo";
 import {Priority} from "../../share/priorities.enum";
 
 @Component({
@@ -12,8 +11,6 @@ import {Priority} from "../../share/priorities.enum";
 
 export class TaskDetailsComponent implements OnInit {
 
- id!: number;
- data!: TodoData[];
  todoItem?: { id: number, name: string, color: string, priority: Priority };
 
   constructor(private readonly activatedRoute: ActivatedRoute) {
@@ -24,20 +21,7 @@ export class TaskDetailsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    const idString = this.activatedRoute.snapshot.paramMap.get('id');
-
-    if (idString === null) {
-      return;
-    }
-
-    this.id = parseInt(idString);
-    this.data = this.activatedRoute.snapshot.data.todoData;
-
-    this.todoItem = this.getTodoItem(this.data);
-  }
-
-  getTodoItem(data: TodoData[]): TodoData | undefined {
-    return data.find(todo => todo.id === this.id);
+    this.todoItem = this.activatedRoute.snapshot.data.selectedItem;
   }
 
 }

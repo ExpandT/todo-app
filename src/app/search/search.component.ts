@@ -8,12 +8,13 @@ import {ActivatedRoute} from "@angular/router";
   styleUrls: ['./search.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class SearchComponent {
+export class SearchComponent{
 
-  localStorageTodoData: TodoData[] = [];
+    localStorageTodoData: TodoData[] = [];
 
-  constructor(private readonly activatedRoute: ActivatedRoute) {
-    this.localStorageTodoData = JSON.parse(this.activatedRoute.snapshot.paramMap.get('allItems')!);
+
+  constructor(private readonly activatedRoute : ActivatedRoute) {
+    this.localStorageTodoData = activatedRoute.snapshot.data.todoData;
   }
 
 }
