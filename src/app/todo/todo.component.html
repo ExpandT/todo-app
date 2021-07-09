@@ -2,14 +2,14 @@
   <div class="todo-container">
     <color-control-dropdown-wrapper class="color-control" *ngIf="form.valid"
                                     [colorFromRadioButton]="selectedColor"
-                                    (shareColor)="colorHandler($event)"
+                                    (shareColor)="setSelectedColor($event)"
                                     (isSelected)="selectHandler($event)"
     ></color-control-dropdown-wrapper>
     <mat-form-field appearance="fill">
       <mat-label>Some Task</mat-label>
       <input matInput formControlName="name">
     </mat-form-field>
-    <mat-radio-group class="radio-buttons-container" formControlName="radiobutton" (change)="changeRadioButtonValue()"
+    <mat-radio-group class="radio-buttons-container" formControlName="radiobutton" (change)="onChangePriority()"
                      *ngIf="form.valid">
       <mat-radio-button class="radio-button-option" [value]="priorities.Urgent">Urgent</mat-radio-button>
       <mat-radio-button class="radio-button-option" [value]="priorities.Middle">Middle</mat-radio-button>

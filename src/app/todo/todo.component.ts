@@ -3,6 +3,7 @@ import {FormBuilder, FormControl, Validators} from '@angular/forms';
 import {TodoData} from "../share/todo";
 import {Priority} from "../share/priorities.enum";
 import {ActivatedRoute} from "@angular/router";
+import {PriorityIcon} from "../share/priority-icons.enum";
 
 
 @Component({
@@ -50,11 +51,11 @@ export class TodoComponent {
   iconName(value: string): string {
     switch (value) {
       case Priority.Urgent:
-        return 'priority_high';
+        return PriorityIcon.UrgentIcon;
       case Priority.Middle:
-        return 'notifications';
+        return PriorityIcon.MediumIcon;
       default:
-        return 'low_priority';
+        return PriorityIcon.LowIcon;
     }
   }
 
@@ -76,6 +77,7 @@ export class TodoComponent {
     this.setDataToLocalStorage();
 
     this.form.reset();
+
     this.form.controls['name'].setErrors(null);
   }
 
@@ -88,11 +90,11 @@ export class TodoComponent {
     this.isSelectedDefaultColor = selectedValue;
   }
 
-  colorHandler(selectedColor: string): void {
+  setSelectedColor(selectedColor: string): void {
     this.selectedColor = selectedColor;
   }
 
-  changeRadioButtonValue() {
+  onChangePriority() {
     this.selectedColor = this.radioButtonValue.value;
     this.isSelectedDefaultColor = false;
   }
