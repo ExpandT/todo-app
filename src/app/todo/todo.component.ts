@@ -51,6 +51,19 @@ export class TodoComponent {
     localStorage.setItem('allItems', JSON.stringify(this.todoStorage));
   }
 
+  iconName(value: string): string {
+    switch (value) {
+      case Priority.Urgent:
+        return 'priority_high';
+        break;
+      case Priority.Middle:
+        return 'notifications';
+        break;
+      default:
+        return 'low_priority';
+    }
+  }
+
   addItem(): void {
     const newTodo = {
       id: Date.now(),
