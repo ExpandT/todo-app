@@ -5,7 +5,7 @@ import {TodoData} from "../../share/todo";
 
 
 @Component({
-  selector: 'dropdown-dropdown',
+  selector: 'dropdown',
   templateUrl: './dropdown.component.html',
   styleUrls: ['./dropdown.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
