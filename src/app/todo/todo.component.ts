@@ -2,6 +2,7 @@ import {ChangeDetectionStrategy, Component} from '@angular/core';
 import {FormBuilder, FormControl, Validators} from '@angular/forms';
 import {TodoData} from "../share/todo";
 import {Priority} from "../share/priorities.enum";
+import {ActivatedRoute} from "@angular/router";
 
 
 @Component({
@@ -19,7 +20,7 @@ export class TodoComponent {
 
   form = this.formBuilder.group({name: ['', Validators.required], radiobutton: ['']});
 
-  todoStorage: TodoData[] = [];
+  todoStorage: TodoData[] = this.activatedRoute.snapshot.data.todoData;
 
   get colorPriority(): Priority {
     if (this.selectedColor === Priority.Urgent) {
@@ -39,12 +40,7 @@ export class TodoComponent {
     return this.form.get('radiobutton') as FormControl;
   }
 
-  constructor(private formBuilder: FormBuilder) {
-    this.todoStorage = this.getLocalStorageItems();
-  }
-
-  getLocalStorageItems(): TodoData[] {
-    return (localStorage.getItem('allItems') !== null) ? JSON.parse(localStorage.getItem('allItems')!) : [];
+  constructor(private formBuilder: FormBuilder, private readonly activatedRoute: ActivatedRoute) {
   }
 
   setDataToLocalStorage(): void {
@@ -55,23 +51,21 @@ export class TodoComponent {
     switch (value) {
       case Priority.Urgent:
         return 'priority_high';
-        break;
       case Priority.Middle:
         return 'notifications';
-        break;
       default:
         return 'low_priority';
     }
   }
 
   addItem(): void {
+    console.log(this.form.valid);
     const newTodo = {
       id: Date.now(),
       name: this.nameControl.value,
       color: this.selectedColor,
       priority: this.colorPriority
     }
-    this.form.reset();
 
     this.todoStorage = [newTodo, ...this.todoStorage];
 
@@ -80,6 +74,9 @@ export class TodoComponent {
     this.selectedColor = '#FFFFFF';
 
     this.setDataToLocalStorage();
+
+    this.form.reset();
+    this.form.controls['name'].setErrors(null);
   }
 
   deleteTask(index: number): void {
