@@ -18,15 +18,14 @@ export class DropdownComponent implements OnInit {
 
   input: FormControl = new FormControl('');
 
-  todoListData: TodoData[] = [];
-  filterData: any = [];
+  filterData: TodoData[] = [];
 
   isVisible: boolean = false;
 
   tabIndexValue: number = -1;
 
   get isBlockVisible(): boolean {
-    return this.isVisible && this.filterData.length;
+    return this.isVisible && this.filterData.length > 0;
   }
 
     ngOnInit(){
@@ -35,7 +34,6 @@ export class DropdownComponent implements OnInit {
           tap((val: string) => {
             this.isVisible = true;
             this.onFilterData(val)
-            this.todoListData = this.dataFromLocalStorage;
           }),
         ).subscribe();
     }
@@ -45,7 +43,7 @@ export class DropdownComponent implements OnInit {
   }
 
   onFilterData(value: string) {
-    this.filterData = this.todoListData.filter((todo: TodoData) => {
+    this.filterData = this.dataFromLocalStorage.filter((todo: TodoData) => {
       return todo.name.replace(/\s/g, '').toLowerCase().indexOf(value.replace(/\s/g, '').toLowerCase()) === 0;
     })
   }
