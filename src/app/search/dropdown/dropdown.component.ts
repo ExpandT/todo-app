@@ -33,7 +33,7 @@ export class DropdownComponent implements OnInit {
         .pipe(
           tap((val: string) => {
             this.isVisible = true;
-            this.onFilterData(val)
+             this.filterData = this.onFilterData(val);
           }),
         ).subscribe();
     }
@@ -43,9 +43,7 @@ export class DropdownComponent implements OnInit {
   }
 
   onFilterData(value: string) {
-    this.filterData = this.dataFromLocalStorage.filter((todo: TodoData) => {
-      return todo.name.replace(/\s/g, '').toLowerCase().indexOf(value.replace(/\s/g, '').toLowerCase()) === 0;
-    })
+    return this.dataFromLocalStorage.filter((todo: TodoData) => todo.name.replace(/\s/g, '').toLowerCase().indexOf(value.replace(/\s/g, '').toLowerCase()) === 0)
   }
 
   hideNames(): void {
