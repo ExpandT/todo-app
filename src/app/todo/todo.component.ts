@@ -60,7 +60,6 @@ export class TodoComponent {
   }
 
   addItem(): void {
-    console.log(this.form.valid);
     const newTodo = {
       id: Date.now(),
       name: this.nameControl.value,
@@ -88,6 +87,10 @@ export class TodoComponent {
 
   selectHandler(selectedValue: boolean): void {
     this.isSelectedDefaultColor = selectedValue;
+  }
+
+  formHandler(form: FormControl){
+    form.reset();
   }
 
   setSelectedColor(selectedColor: string): void {

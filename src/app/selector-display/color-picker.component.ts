@@ -1,5 +1,6 @@
-import {ChangeDetectionStrategy, Component, Output, EventEmitter, Input} from '@angular/core';
+import {ChangeDetectionStrategy, Component, EventEmitter, Input, Output} from '@angular/core';
 import {ColorsList} from "../share/colors";
+import {FormControl} from "@angular/forms";
 
 @Component({
   selector: 'color-control-dropdown-wrapper',
@@ -12,6 +13,7 @@ export class ColorPickerComponent {
   @Input() colorFromRadioButton = '';
   @Output() isSelected = new EventEmitter<boolean>();
   @Output() shareColor = new EventEmitter<string>();
+  @Output() form = new EventEmitter<FormControl>();
 
   colors: ColorsList[] = [
     {name: 'Red', value: '#Ff0000'},
@@ -32,5 +34,8 @@ export class ColorPickerComponent {
 
   shareColorValue(selectedColor: string): void {
     this.shareColor.emit(selectedColor)
+  }
+  formControlHandler(input: FormControl){
+    this.form.emit(input);
   }
 }

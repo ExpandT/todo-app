@@ -1,4 +1,9 @@
 <div class="color-select-container">
+  <mat-form-field appearance="fill">
+  <mat-label>Type Color Hex-Code</mat-label>
+  <input matInput class="search-color-input" [formControl]="input">
+  </mat-form-field>
+  <button class="search-color-btn" type="submit" (click)="onFormSubmit(input.value)">Pick</button>
   <div class="color-display-box" [ngStyle]="{backgroundColor:selectedColor}">
     <div class="color-select-arrow">
       <button class="arrow-button" (click)="showColorPicker()"><span class="arrow" [class.opened]="!isOpened"></span>

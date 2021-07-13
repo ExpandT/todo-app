@@ -1,6 +1,17 @@
 .color-select-container {
   display: flex;
   justify-content: center;
+  align-items: center;
+
+  .search-color-input{
+    margin-right: 10px;
+  }
+
+  .search-color-btn{
+    margin-left: 10px;
+    margin-right: 10px;
+    height: 20px;
+  }
 
   .color-display-box {
     width: 20px;

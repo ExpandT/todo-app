@@ -10,7 +10,8 @@ const MaterialComponents = [
   MatFormFieldModule,
   MatButtonModule,
   MatIconModule,
-  MatRadioModule
+  MatRadioModule,
+
 ];
 
 @NgModule({
