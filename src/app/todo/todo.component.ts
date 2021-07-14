@@ -1,9 +1,10 @@
-import {ChangeDetectionStrategy, Component} from '@angular/core';
+import {ChangeDetectionStrategy, ChangeDetectorRef, Component} from '@angular/core';
 import {FormBuilder, FormControl, Validators} from '@angular/forms';
 import {TodoData} from "../share/todo";
 import {Priority} from "../share/priorities.enum";
 import {ActivatedRoute} from "@angular/router";
 import {PriorityIcon} from "../share/priority-icons.enum";
+import {ColorsList} from "../share/colors";
 
 
 @Component({
@@ -15,19 +16,43 @@ import {PriorityIcon} from "../share/priority-icons.enum";
 
 export class TodoComponent {
 
-  selectedColor = "";
+  colors: ColorsList[] = [
+    {name: 'Red', value: '#Ff0000'},
+    {name: 'Green', value: '#00ff00'},
+    {name: 'Yellow', value: '#FFFF00'},
+    {name: 'Blue', value: '#0000FF'},
+    {name: 'Orange', value: '#FFA500'},
+    {name: 'Pink', value: '#FFC0CB'},
+    {name: 'White', value: '#FFFFFF'},
+    {name: 'Black', value: '#000000'},
+    {name: 'Purple', value: '#800080'},
+    {name: 'Gray', value: '#808080'},
+  ];
+
+  form = this.formBuilder.group({
+    name: ['', Validators.required],
+    radiobutton: [''],
+    colorControl: ['#FFFFFF']
+  });
+
   isSelectedDefaultColor = true;
   priorities = Priority;
 
-  form = this.formBuilder.group({name: ['', Validators.required], radiobutton: ['']});
-
   todoStorage: TodoData[] = this.activatedRoute.snapshot.data.todoData;
 
+  get colorControlValue(){
+    return this.form.get('colorControl')?.value;
+  }
+
+  get colorControl(){
+    return this.form.get('colorControl');
+  }
+
   get colorPriority(): Priority {
-    if (this.selectedColor === Priority.Urgent) {
+    if (this.colorControlValue === Priority.Urgent) {
       return Priority.Urgent
     }
-    if (this.selectedColor === Priority.Middle) {
+    if (this.colorControlValue === Priority.Middle) {
       return Priority.Middle
     }
     return Priority.Low;
@@ -41,7 +66,7 @@ export class TodoComponent {
     return this.form.get('radiobutton') as FormControl;
   }
 
-  constructor(private formBuilder: FormBuilder, private readonly activatedRoute: ActivatedRoute) {
+  constructor(private formBuilder: FormBuilder, private readonly activatedRoute: ActivatedRoute, private readonly changeDetectorRef: ChangeDetectorRef) {
   }
 
   setDataToLocalStorage(): void {
@@ -58,12 +83,11 @@ export class TodoComponent {
         return PriorityIcon.LowIcon;
     }
   }
-
   addItem(): void {
     const newTodo = {
       id: Date.now(),
       name: this.nameControl.value,
-      color: this.selectedColor,
+      color: this.colorControlValue,
       priority: this.colorPriority
     }
 
@@ -71,13 +95,15 @@ export class TodoComponent {
 
     this.isSelectedDefaultColor = true;
 
-    this.selectedColor = '#FFFFFF';
+    this.colorControl?.setValue('#FFFFFF')
 
     this.setDataToLocalStorage();
+console.log(this.form.valid)
+    this.form.reset({ name: '',
+      radiobutton: '',
+      colorControl: '#FFFFFF'});
 
-    this.form.reset();
-
-    this.form.controls['name'].setErrors(null);
+    this.changeDetectorRef.detectChanges();
   }
 
   deleteTask(index: number): void {
@@ -89,16 +115,8 @@ export class TodoComponent {
     this.isSelectedDefaultColor = selectedValue;
   }
 
-  formHandler(form: FormControl){
-    form.reset();
-  }
-
-  setSelectedColor(selectedColor: string): void {
-    this.selectedColor = selectedColor;
-  }
-
   onChangePriority() {
-    this.selectedColor = this.radioButtonValue.value;
+    this.colorControl?.setValue(this.radioButtonValue.value);
     this.isSelectedDefaultColor = false;
   }
 

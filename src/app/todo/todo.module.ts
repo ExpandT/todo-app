@@ -5,12 +5,13 @@ import {TaskDetailsComponent} from "./task-details/task-details.component";
 import {MaterialModule} from "../material/material.module";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {TodoRoutingModule} from "./todo-routing.module";
-import {ColorPickerModule} from "../selector-display/color-picker.module";
+import {ColorSelectComponent} from "../selector-display/color-select/color-select.component";
 
 @NgModule({
   declarations: [
     TodoComponent,
     TaskDetailsComponent,
+    ColorSelectComponent,
   ],
   imports: [
     CommonModule,
@@ -18,7 +19,6 @@ import {ColorPickerModule} from "../selector-display/color-picker.module";
     ReactiveFormsModule,
     FormsModule,
     TodoRoutingModule,
-    ColorPickerModule
   ]
 })
 export class TodoModule {
