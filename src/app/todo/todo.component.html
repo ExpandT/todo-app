@@ -1,11 +1,10 @@
 <form [formGroup]="form">
   <div class="todo-container">
-    <color-control-dropdown-color-select class="color-control" *ngIf="form.valid"
-                                    formControlName="colorControl"
-                                    [colorsList]="colors"
-                                    [colorFromRadioButton]="colorControlValue"
-                                    (isSelected)="selectHandler($event)"
-    ></color-control-dropdown-color-select>
+    <color-select-dropdown class="color-control" *ngIf="form.valid"
+                           formControlName="colorControl"
+                           [colorsList]="colorsList"
+                           [colorFromRadioButton]="colorControlValue"
+    ></color-select-dropdown>
     <mat-form-field appearance="fill">
       <mat-label>Some Task</mat-label>
       <input matInput formControlName="name">
