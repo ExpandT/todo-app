@@ -4,7 +4,8 @@ import {TodoData} from "../share/todo";
 import {Priority} from "../share/priorities.enum";
 import {ActivatedRoute} from "@angular/router";
 import {PriorityIcon} from "../share/priority-icons.enum";
-import {ColorsList} from "../share/colors";
+import {Color} from "../share/colors";
+import {tap} from "rxjs/operators";
 
 
 @Component({
@@ -16,7 +17,7 @@ import {ColorsList} from "../share/colors";
 
 export class TodoComponent {
 
-  colors: ColorsList[] = [
+  colorsList: Color[] = [
     {name: 'Red', value: '#Ff0000'},
     {name: 'Green', value: '#00ff00'},
     {name: 'Yellow', value: '#FFFF00'},
@@ -40,11 +41,11 @@ export class TodoComponent {
 
   todoStorage: TodoData[] = this.activatedRoute.snapshot.data.todoData;
 
-  get colorControlValue(){
+  get colorControlValue() {
     return this.form.get('colorControl')?.value;
   }
 
-  get colorControl(){
+  get colorControl() {
     return this.form.get('colorControl');
   }
 
@@ -67,6 +68,14 @@ export class TodoComponent {
   }
 
   constructor(private formBuilder: FormBuilder, private readonly activatedRoute: ActivatedRoute, private readonly changeDetectorRef: ChangeDetectorRef) {
+    this.form.get('colorControl')?.valueChanges.pipe(tap(res => {
+      if (res === "#FFFFFF") {
+        this.isSelectedDefaultColor = true
+      }
+      if (res !== '#FFFFFF') {
+        this.isSelectedDefaultColor = false
+      }
+    })).subscribe()
   }
 
   setDataToLocalStorage(): void {
@@ -83,6 +92,7 @@ export class TodoComponent {
         return PriorityIcon.LowIcon;
     }
   }
+
   addItem(): void {
     const newTodo = {
       id: Date.now(),
@@ -98,10 +108,11 @@ export class TodoComponent {
     this.colorControl?.setValue('#FFFFFF')
 
     this.setDataToLocalStorage();
-console.log(this.form.valid)
-    this.form.reset({ name: '',
+    this.form.reset({
+      name: '',
       radiobutton: '',
-      colorControl: '#FFFFFF'});
+      colorControl: '#FFFFFF'
+    });
 
     this.changeDetectorRef.detectChanges();
   }
@@ -109,10 +120,6 @@ console.log(this.form.valid)
   deleteTask(index: number): void {
     this.todoStorage = this.todoStorage.filter((value, todoIndex) => index !== todoIndex);
     this.setDataToLocalStorage();
-  }
-
-  selectHandler(selectedValue: boolean): void {
-    this.isSelectedDefaultColor = selectedValue;
   }
 
   onChangePriority() {
