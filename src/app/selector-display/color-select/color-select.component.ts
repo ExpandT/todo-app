@@ -1,10 +1,10 @@
-import {ChangeDetectionStrategy, Component, EventEmitter, Input, Output} from '@angular/core';
-import {ColorsList} from "../../share/colors";
+import {ChangeDetectionStrategy, Component, Input} from '@angular/core';
+import {Color} from "../../share/colors";
 import {ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR, Validators} from "@angular/forms";
 
 
 @Component({
-  selector: 'color-control-dropdown-color-select',
+  selector: 'color-select-dropdown',
   templateUrl: './color-select.component.html',
   styleUrls: ['./color-select.component.scss'],
   providers: [{
@@ -16,6 +16,20 @@ import {ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR, Validators} from "
 })
 
 export class ColorSelectComponent implements ControlValueAccessor {
+
+  @Input() colorsList!: Color[];
+
+  @Input() set colorFromRadioButton(value: string) {
+    this.selectedColor = value;
+  };
+
+  selectedColor: string = '';
+
+  input = new FormControl('', Validators.pattern(/^[a-zA-Z0-9#]*$/));
+
+  colorPickerState: boolean = false;
+  isOpened: boolean = true;
+
   onChange = (color: string) => {
   };
   onTouched = () => {
@@ -36,22 +50,6 @@ export class ColorSelectComponent implements ControlValueAccessor {
   setDisabledState(isDisabled: boolean): void {
   }
 
-
-  @Input() colorsList!: ColorsList[];
-
-  @Input() set colorFromRadioButton(value: string) {
-    this.selectedColor = value;
-  };
-
-  @Output() isSelected = new EventEmitter<boolean>();
-
-  selectedColor: string = '';
-
-  input = new FormControl('', Validators.pattern(/^[a-zA-Z0-9#]*$/));
-
-  colorPickerState: boolean = false;
-  isOpened: boolean = true;
-
   changeArrowState() {
     if (!this.isOpened) {
       this.isOpened = true;
@@ -68,15 +66,12 @@ export class ColorSelectComponent implements ControlValueAccessor {
     this.isOpened = !this.isOpened;
     this.selectedColor = value;
     this.colorPickerState = !this.colorPickerState;
-    const isSelectedValue = this.selectedColor == "#FFFFFF";
     this.onChange(this.selectedColor)
-    this.isSelected.emit(isSelectedValue);
   }
 
-  onFilterColors(value: string): ColorsList[] {
-    let color = this.colorsList.filter((color: ColorsList) => color.value.replace(/\s/g, '').toLowerCase().indexOf(value.replace(/\s/g, '').toLowerCase()) === 0)
+  onFilterColors(value: string): Color[] {
+    let color = this.colorsList.filter((color: Color) => color.value.replace(/\s/g, '').toLowerCase().indexOf(value.replace(/\s/g, '').toLowerCase()) === 0)
     if (color.length !== 7) {
-      this.isSelected.emit(true);
     }
     return color;
   }
@@ -89,12 +84,10 @@ export class ColorSelectComponent implements ControlValueAccessor {
     if (value === null) {
       return;
     }
-    let color = this.onFilterColors(value);
-    this.selectedColor = color.map((res) => res.value).toString();
-    const isSelectedValue = this.selectedColor == "#FFFFFF";
+    let filteredColors = this.onFilterColors(value);
+    this.selectedColor = filteredColors.map((res) => res.value).toString();
     this.onChange(this.selectedColor)
     if (this.selectedColor.length == 7) {
-      this.isSelected.emit(isSelectedValue);
     }
     this.input.reset()
   }

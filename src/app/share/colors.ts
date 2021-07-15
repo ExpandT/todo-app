@@ -1,4 +1,4 @@
-export interface ColorsList{
+export interface Color {
   name: string;
   value: string;
 }
