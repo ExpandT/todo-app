@@ -69,12 +69,7 @@ export class TodoComponent {
 
   constructor(private formBuilder: FormBuilder, private readonly activatedRoute: ActivatedRoute, private readonly changeDetectorRef: ChangeDetectorRef) {
     this.form.get('colorControl')?.valueChanges.pipe(tap(res => {
-      if (res === "#FFFFFF") {
-        this.isSelectedDefaultColor = true
-      }
-      if (res !== '#FFFFFF') {
-        this.isSelectedDefaultColor = false
-      }
+      this.isSelectedDefaultColor = res === '#FFFFFF';
     })).subscribe()
   }
 
